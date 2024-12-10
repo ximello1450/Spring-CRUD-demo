@@ -1,6 +1,14 @@
 package com.SpringCRUD.demo.model;
 
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name ="usuarios")
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private String apellido;
@@ -8,6 +16,11 @@ public class Usuario {
     private String contrasena;
     private String telefono;
     private String rol;
+    @OneToMany(mappedBy = "usuario")
+    private List<Viaje> viajes;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Reservacion> reservacions;
 
     public int getId() {
         return id;
@@ -65,7 +78,15 @@ public class Usuario {
         this.apellido = apellido;
     }
 
-    public Usuario(int id, String nombre, String apellido, String correo, String contrasena, String telefono, String rol) {
+    public List<Viaje> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(List<Viaje> viajes) {
+        this.viajes = viajes;
+    }
+
+    public Usuario(int id, String nombre, String apellido, String correo, String contrasena, String telefono, String rol, List<Viaje> viajes) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -73,7 +94,9 @@ public class Usuario {
         this.contrasena = contrasena;
         this.telefono = telefono;
         this.rol = rol;
+        this.viajes = viajes;
     }
+
     public Usuario(){
 
     }
@@ -88,6 +111,7 @@ public class Usuario {
                 ", contrasena='" + contrasena + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", rol='" + rol + '\'' +
+                ", viajes=" + viajes +
                 '}';
     }
 }

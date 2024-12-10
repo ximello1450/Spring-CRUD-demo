@@ -1,21 +1,33 @@
 package com.SpringCRUD.demo.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
+import java.util.Date;
+@Entity
+@Table (name="reservaciones")
 public class Reservacion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idReservacion;
     private Date fecha_creacion;
     private Date fecha_modificacion;
     private float total;
+    @ManyToOne
+    private Usuario usuario;
+
+    @OneToOne(mappedBy = "reservacion")
+    private DetalleReservacion detalleReservacion;
     public Reservacion() {
 
     }
 
-    public Reservacion(int idReservacion, float total, Date fecha_modificacion, Date fecha_creacion) {
+    public Reservacion(int idReservacion, Date fecha_creacion, Date fecha_modificacion, float total, Usuario usuario, DetalleReservacion detalleReservacion) {
         this.idReservacion = idReservacion;
-        this.total = total;
-        this.fecha_modificacion = fecha_modificacion;
         this.fecha_creacion = fecha_creacion;
+        this.fecha_modificacion = fecha_modificacion;
+        this.total = total;
+        this.usuario = usuario;
+        this.detalleReservacion = detalleReservacion;
     }
 
     public int getIdReservacion() {
@@ -50,6 +62,22 @@ public class Reservacion {
         this.total = total;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public DetalleReservacion getDetalleReservacion() {
+        return detalleReservacion;
+    }
+
+    public void setDetalleReservacion(DetalleReservacion detalleReservacion) {
+        this.detalleReservacion = detalleReservacion;
+    }
+
     @Override
     public String toString() {
         return "Reservacion{" +
@@ -57,6 +85,8 @@ public class Reservacion {
                 ", fecha_creacion=" + fecha_creacion +
                 ", fecha_modificacion=" + fecha_modificacion +
                 ", total=" + total +
+                ", usuario=" + usuario +
+                ", detalleReservacion=" + detalleReservacion +
                 '}';
     }
 }

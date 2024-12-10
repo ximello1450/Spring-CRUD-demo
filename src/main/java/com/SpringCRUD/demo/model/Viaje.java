@@ -1,8 +1,13 @@
 package com.SpringCRUD.demo.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
+import java.util.Date;
+@Entity
+@Table(name="viajes")
 public class Viaje {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String destino;
     private Date fecha_salida;
@@ -10,12 +15,14 @@ public class Viaje {
     private String asientos;
     private String imagen;
     private float costo_unico;
+    @ManyToOne
+    private Usuario usuario;
 
     public Viaje (){
 
     }
 
-    public Viaje(int id, String destino, Date fecha_salida, Date fecha_llegada, String asientos, String imagen,float costo_unico) {
+    public Viaje(int id, String destino, Date fecha_salida, Date fecha_llegada, String asientos, String imagen,float costo_unico, Usuario usuario) {
         this.id = id;
         this.destino = destino;
         this.fecha_salida = fecha_salida;
@@ -23,6 +30,7 @@ public class Viaje {
         this.asientos = asientos;
         this.imagen = imagen;
         this.costo_unico=costo_unico;
+        this.usuario=usuario;
     }
 
     public int getId() {
@@ -80,16 +88,25 @@ public class Viaje {
         this.costo_unico = costo_unico;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
         return "Viaje{" +
                 "id=" + id +
                 ", destino='" + destino + '\'' +
-                ", fecha_salida='" + fecha_salida + '\'' +
-                ", fecha_llegada='" + fecha_llegada + '\'' +
+                ", fecha_salida=" + fecha_salida +
+                ", fecha_llegada=" + fecha_llegada +
                 ", asientos='" + asientos + '\'' +
                 ", imagen='" + imagen + '\'' +
-                ", costo_unico='" + costo_unico + '\'' +
+                ", costo_unico=" + costo_unico +
+                ", usuario=" + usuario +
                 '}';
     }
 }
