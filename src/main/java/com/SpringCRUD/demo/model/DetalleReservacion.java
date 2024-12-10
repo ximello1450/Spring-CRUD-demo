@@ -16,7 +16,7 @@ public class DetalleReservacion {
     @OneToOne(mappedBy = "")
     private Reservacion reservacion;
 
-    @OneToOne
+    @ManyToOne
     private Viaje viaje;
     public DetalleReservacion(){
 
