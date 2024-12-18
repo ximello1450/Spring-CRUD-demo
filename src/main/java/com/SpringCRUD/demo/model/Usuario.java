@@ -86,7 +86,7 @@ public class Usuario {
         this.viajes = viajes;
     }
 
-    public Usuario(int id, String nombre, String apellido, String correo, String contrasena, String telefono, String rol, List<Viaje> viajes) {
+    public Usuario(int id, String nombre, String apellido, String correo, String contrasena, String telefono, String rol) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -94,7 +94,6 @@ public class Usuario {
         this.contrasena = contrasena;
         this.telefono = telefono;
         this.rol = rol;
-        this.viajes = viajes;
     }
 
     public Usuario(){
